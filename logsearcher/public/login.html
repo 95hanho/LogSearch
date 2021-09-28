@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <script src='javascripts/bootstrap.min.js'></script>
+  </head>
+  <body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb nav justify-content-end">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group">
+
+                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">검색방법&nbsp;</button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">번호 검색</a>
+                        <a class="dropdown-item" href="/search_file">파일 검색</a>
+                        <a class="dropdown-item" href="/search_call_only">발신번호 검색</a>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-light"><u>hanho</u>님</button>
+                <button type="button" class="btn btn-secondary"><a href="/auth/logout"><font color=white>로그아웃</font></a></button>
+            </div>
+        </ol>
+    </nav>
+    <!-- 순수하게 submit 으로 param 을 요청할 때는, name 에 값이 있어야함. id 는 javascript 컨트롤 -->
+      <form method="post" action="/auth/process">
+          <div class="container">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" width="20%" bgcolor="#e3f2fd" style="text-align:center; font-weight:bold">
+                        <h1 class="display-5"><font color=red>M</font><font size = 6>ESSAGE</font>
+                          <font color=red>L</font><font size = 6>OG</font> <font color=red>S</font><font size = 6>EARCHER</font></h1>
+                        <h3 class="lead"><b>문자 발송 내역</b>을 조회하는 WEB Page 입니다.</h3>
+                    </tr>
+                    <tr>
+                        <th>
+                            <center>조건이 많을수록 정확하고 빨리 데이터가 조회 됩니다. <br>
+                            <font size=2>※ 당일기준 <font color=red>6개월</font> 이내 자료에서 검색되며 <i><font color=red>발송일</font>, <font color=red>발신번호</font></i> 는
+                            <i><font color=red>필수</font></i> 입니다.</center>
+                    </tr>
+                </thead>
+            </table>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationDefault01">아이디</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="id">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationDefault01">비밀번호</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="pw">
+                </div>
+                <button type="submit" class="btn btn-primary">로그인</button>
+                <input type="reset" class="btn btn-light" value="reset">
+            </div>
+          </div>
+      </form>
+  </body>
+</html>
