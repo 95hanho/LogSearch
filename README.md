@@ -1,5 +1,6 @@
 # LogSearch
 ELK로그분석 조회웹
+![image](https://user-images.githubusercontent.com/64001275/206630757-b4652e84-39b7-40e7-84a9-aba992ec0e8a.png)
 
 ## 주요 기능 디렉토리
 
