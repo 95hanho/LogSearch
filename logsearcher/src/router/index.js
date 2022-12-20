@@ -1,82 +1,85 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import VueCookies from 'vue-cookies'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import VueCookies from "vue-cookies";
 
-import { store } from '../store/store'
+import { store } from "../store/store";
 
-import Login from '../components/Login'
-import Num from '../components/Num_Search'
-import File from '../components/File_Search'
-import Sn from '../components/Sn_Search'
-import UserInput from '../components/User_Input'
-import UserAdmin from '../components/User_Admin'
+import Login from "../components/Login";
+import Num from "../components/Num_Search";
+import File from "../components/File_Search";
+import Sn from "../components/Sn_Search";
+import UserInput from "../components/User_Input";
+import UserAdmin from "../components/User_Admin";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Login',
+    path: "/",
+    name: "Login",
     component: Login,
-    meta: { unauthorized: true }
+    meta: { unauthorized: true },
   },
   {
-    path: '/#/num_search',
-    name: 'Num',
-    component: Num
+    path: "/#/num_search",
+    name: "Num",
+    component: Num,
   },
   {
-    path: '/#/file_search',
-    name: 'File',
-    component: File
+    path: "/#/file_search",
+    name: "File",
+    component: File,
   },
   {
-    path: '/#/sn_search',
-    name: 'Sn',
-    component: Sn
+    path: "/#/sn_search",
+    name: "Sn",
+    component: Sn,
   },
   {
-    path: '/#/user_input',
-    name: 'UserInput',
-    component: UserInput
+    path: "/#/user_input",
+    name: "UserInput",
+    component: UserInput,
   },
   {
-    path: '/#/user_admin',
-    name: 'UserAdmin',
-    component: UserAdmin
+    path: "/#/user_admin",
+    name: "UserAdmin",
+    component: UserAdmin,
   },
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
 
-router.beforeEach(async(to, from,next) => {
-  if(VueCookies.get('boardLimit') !== null){
-    store.dispatch('boardLimit', { num : VueCookies.get('boardLimit') });
+router.beforeEach(async (to, from, next) => {
+  if (VueCookies.get("boardLimit") !== null) {
+    store.dispatch("boardLimit", { num: VueCookies.get("boardLimit") });
   }
 
-  if(VueCookies.get('accessToken') === null && VueCookies.get('refreshToken') !== null){
-    store.dispatch('urlCookie', { url : VueCookies.get('urlCookie') });
-    await store.dispatch('refreshToken');
+  if (
+    VueCookies.get("accessToken") === null &&
+    VueCookies.get("refreshToken") !== null
+  ) {
+    store.dispatch("urlCookie", { url: VueCookies.get("urlCookie") });
+    await store.dispatch("refreshToken");
     //await store.dispatch('urlCookie', { url : VueCookies.get('urlCookie') });
   }
-  if(to.matched.some(record => record.meta.unauthorized)){
+  if (to.matched.some((record) => record.meta.unauthorized)) {
     return next();
   }
-  if(VueCookies.get('refreshToken') === null){
-    alert('로그인 해주세요.');
-    await store.dispatch('logout');
+  if (VueCookies.get("refreshToken") === null) {
+    alert("로그인 해주세요.");
+    await store.dispatch("logout");
     return router.go();
   }
-  if(VueCookies.get('accessToken')){
+  if (VueCookies.get("accessToken")) {
     return next();
   }
-  alert('로그인 해주세요.');
-  await store.dispatch('logout');
+  alert("로그인 해주세요.");
+  await store.dispatch("logout");
   return router.go();
-})
+});
